@@ -28,6 +28,7 @@ router.get('/get', (req, res) => {
     for (let i = 0; i < users.length; i++) {
         if (users[i].id === id) {
             res.send(users[i])
+            return;
         }
     }
 })
