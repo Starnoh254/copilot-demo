@@ -26,10 +26,11 @@ router.get('/list', (req, res) => {
 router.get('/get', (req, res) => {
     const id = req.query.id
     for (let i = 0; i < users.length; i++) {
-        if (users[i].id === id) {
-            res.send(users[i])
-            return res.send(users[i])
-        }
+    const user = users.find(u => u.id == id);
+    if (user) {
+        res.send(user);
+    } else {
+        res.status(404).send('User not found');
     }
     res.status(404).send('User not found')
 })
