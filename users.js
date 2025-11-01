@@ -25,14 +25,13 @@ router.get('/list', (req, res) => {
 
 router.get('/get', (req, res) => {
     const id = req.query.id
-    for (let i = 0; i < users.length; i++) {
-    const user = users.find(u => u.id == id);
+    // Convert both IDs to strings for comparison since query params are strings
+    const user = users.find(u => String(u?.id) === String(id));
     if (user) {
         res.send(user);
-    } else {
-        res.status(404).send('User not found');
+        return;
     }
-    res.status(404).send('User not found')
+    res.status(404).send('User not found');
 })
 
 module.exports = router
