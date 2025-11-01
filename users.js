@@ -1,10 +1,19 @@
 const express = require('express');
+const Joi = require('joi');
 const router = express.Router();
 
 let users = []
 
 router.post('/add', (req, res) => {
-    const user = req.body
+    const schema = Joi.object({
+        id: Joi.required(),
+        name: Joi.string().required()
+    });
+    const { error, value } = schema.validate(req.body);
+    if (error) {
+        return res.status(400).send("Invalid user data: " + error.details[0].message);
+    }
+    const user = value;
     users.push(user)
     console.log("Added user", user)
     res.send("user added")
