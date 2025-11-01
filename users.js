@@ -26,7 +26,7 @@ router.get('/list', (req, res) => {
 router.get('/get', (req, res) => {
     const id = req.query.id
     // Convert both IDs to strings for comparison since query params are strings
-    const user = users.find(u => u?.id !== undefined && String(u.id) === String(id));
+    const user = users.find(u => String(u?.id) === String(id));
     if (user) {
         res.send(user);
         return;
